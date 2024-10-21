@@ -20,6 +20,7 @@ public
 	procedure setCliente(unCliente: string);
 	procedure setTotalAPagar(unTotalAPagar: real);
 	function getTotalAPagar():real;
+	function getCliente():string;
 	procedure agregarProducto(unProducto: Producto);
 	function cuantosProductosTenes(): integer;
 	procedure imprimir();
@@ -39,7 +40,10 @@ procedure Ticket.setCliente(unCliente : string);
 	begin
 	cliente := unCliente;
 	end;
-
+function Ticket.getCliente():string;
+	begin
+	getCliente:=cliente;
+	end;
 procedure Ticket.setTotalAPagar(unTotalAPagar : real);
 	begin
 	totalAPagar := unTotalAPagar;

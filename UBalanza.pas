@@ -12,7 +12,6 @@ type
 			
 		public
 			constructor create();
-			
 			procedure limpiar();
 			procedure setPrecioPorKilo(unPrecioPorKilo: real);
 			procedure pesar(unPesoEnKilos: real);

@@ -13,6 +13,8 @@ interface
 	procedure agregarProducto(unProducto:Producto);
 	function sacarProducto():Producto;
 	function cuantosProductosTenes():integer;
+	function getListaProductos():p;
+	function getCurrentProducto():Producto;
 	end;
 	
 implementation
@@ -42,5 +44,14 @@ implementation
 		cuantosProductosTenes:= cantidadDeProductos;
 	end;
 
+	function Carrito.getListaProductos():p;
+	begin
+		getListaProductos:=productos;
+	end;
+	
+	function Carrito.getCurrentProducto():Producto;
+	begin
+		getCurrentProducto:=productos.current();
+	end;
 END.
 
