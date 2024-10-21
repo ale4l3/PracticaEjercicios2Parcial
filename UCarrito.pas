@@ -4,25 +4,26 @@ interface
 	uses GenericLinkedList, UProducto;	
 	type
 	p = specialize LinkedList<Producto>;
+	
 	Carrito = Class
-	private
-	productos : p;
-	cantidadDeProductos:integer;
-	public
-	constructor create();
-	procedure agregarProducto(unProducto:Producto);
-	function sacarProducto():Producto;
-	function cuantosProductosTenes():integer;
-	function getListaProductos():p;
-	function getCurrentProducto():Producto;
+		private
+			productos : p;
+			cantidadDeProductos:integer;
+		public
+			constructor create();
+			procedure agregarProducto(unProducto:Producto);
+			function sacarProducto():Producto;
+			function cuantosProductosTenes():integer;
+			function getListaProductos():p;
+			function getCurrentProducto():Producto;
 	end;
 	
 implementation
 
 	constructor Carrito.create();
 	begin
-	productos:= productos.create();
-	cantidadDeProductos := 0;
+		productos:= p.create();
+		cantidadDeProductos := 0;
 	end;
 	
 	procedure Carrito.agregarProducto(unProducto:Producto);

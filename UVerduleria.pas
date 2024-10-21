@@ -8,32 +8,39 @@ Cree un objeto Verduleria para representar a la verdulería.
 unit UVerduleria;
 {$mode objfpc}
 interface
-	uses UCaja, UCliente, UCarrito,UTicket ;
+
+	uses UCaja, UCliente, UCarrito, UTicket, genericlinkedlist, UProducto, UDateTime, URandomGenerator;
+	
 	type
-		Verduleria = class
-		private
-		nombre: string;
-		caja: Caja;
-		public
-		constructor create(unNombre: string);
-		procedure atender(unCliente: Cliente);
-	end;
-implementation		
+	
+		Verduleria = Class
+			private
+				nombre: string;
+				vCaja: Caja;
+			public
+				constructor create(unNombre: string);
+				procedure atender(unCliente: Cliente);
+					
+		end;
+	
+implementation	
+	
 		constructor Verduleria.create(unNombre: string);
 			begin
 				nombre:=unNombre;
-				caja:= caja.create();
+				vCaja:= Caja.create();
 			end;
-		procedure atender(unCliente: Cliente);
+			
+		procedure Verduleria.atender(unCliente: Cliente);
 		var
-		c:Carrito;
-		t:Ticket;
-		ok:boolean;
+			c:Carrito;
+			t:Ticket;
+			ok:boolean;
 		begin
-		c := Carrito.create();
-		unCliente.elegirProductos(c);
-		t:=caja.generarTicket(unCliente, c);
-		unCliente.cobrar(t, ok);
+			c := Carrito.create();
+			unCliente.elegirProductos(c);
+			t := vCaja.generarTicket(unCliente, c);
+			unCliente.cobrar(t, ok);
 		end;
 end.
 

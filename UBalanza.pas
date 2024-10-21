@@ -20,39 +20,40 @@ type
 	end;
 	
 implementation
+
     constructor Balanza.create();
     begin
-    self.limpiar();
+		self.limpiar();
     end;
     
 	procedure Balanza.limpiar();
 	begin
-	cantProds:= 0;
-	precioPorKilo:= 0;
-	totalAPagar:= 0;
+		cantProds:= 0;
+		precioPorKilo:= 0;
+		totalAPagar:= 0;
 	end;
 	
 	procedure Balanza.setPrecioPorKilo(unPrecioPorKilo: real);
 	begin
-	precioPorKilo:= unPrecioPorKilo;
+		precioPorKilo:= unPrecioPorKilo;
 	end;
 	
 	procedure Balanza.pesar(unPesoEnKilos: real);
 	begin
-	cantProds:= cantProds + 1;
-	totalAPagar:= totalAPagar + precioPorKilo * unPesoEnKilos;
+		cantProds:= cantProds + 1;
+		totalAPagar:= totalAPagar + precioPorKilo * unPesoEnKilos;
 	end;
 	
 	procedure Balanza.imprimir();
 	begin
-	writeln('---------------------------------------------');
-	writeln('Cantidad de productos pesados: ', cantProds);
-	writeln('Total a pagar: ', totalAPagar:2:2);
-	writeln('---------------------------------------------');
+		writeln('---------------------------------------------');
+		writeln('Cantidad de productos pesados: ', cantProds);
+		writeln('Total a pagar: ', totalAPagar:2:2);
+		writeln('---------------------------------------------');
 	end;
 	
 	function Balanza.getTotalAPagar(): real;
 	begin
-	getTotalAPagar:= totalAPagar;
+		getTotalAPagar:= totalAPagar;
 	end;
 end.

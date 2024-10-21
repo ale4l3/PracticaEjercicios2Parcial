@@ -32,7 +32,7 @@ procedure CargarCarrito (var c : Carrito);
 	rg.addlabel('mandarina'); 
 	rg.addlabel('naranja');
 	rg.addlabel('tomate');
-	rg.addlabel('fruutilla');
+	rg.addlabel('frutilla');
 	rg.addlabel('lechuga');
 
 	cant:= rg.getInteger(1, 10);

@@ -20,27 +20,28 @@ type
 	end;
 	
 implementation
+
     constructor CajaDeAhorro.create(unNumero: integer);
     begin
-    numero:= unNumero;
+		numero:= unNumero;
     end;
     
     function CajaDeAhorro.getNumero: integer;
     begin
-    getNumero:= numero;
+		getNumero:= numero;
     end;
     
 	procedure CajaDeAhorro.depositar(unMonto: real);
 	begin
-	saldo:= saldo + unMonto;
+		saldo:= saldo + unMonto;
 	end;
 	
 	procedure CajaDeAhorro.extraer(unMonto: real; var ok: boolean);
 	begin
 	if saldo > unMonto then
 		begin
-		saldo:= saldo - unMonto;
-		ok:= true;
+			saldo:= saldo - unMonto;
+			ok:= true;
 		end
 	else
 		ok:= false;
@@ -48,7 +49,7 @@ implementation
 	
 	function CajaDeAhorro.consultarSaldo(): real;
 	begin
-	consultarSaldo:= saldo;
+		consultarSaldo:= saldo;
 	end;
 				
 end.

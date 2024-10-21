@@ -2,7 +2,7 @@ unit UDateTime;
 {$mode objfpc}
 
 interface
-
+uses SysUtils;
 type
 
 	Date = class
@@ -16,7 +16,7 @@ type
 			function getMonth(): integer;
 			function getYear(): integer;			
 			function toString(): ansistring; override;
-			function equals(d: date): boolean;
+			function equals(d: date): boolean; reintroduce;
 			function greaterThan(d: date): boolean;
 			function lessThan(d: date): boolean;
 	end;
@@ -35,7 +35,7 @@ type
 	end;	
 	
 implementation
-uses SysUtils;
+
 
     constructor Date.create(d, m, y: integer);
     begin
