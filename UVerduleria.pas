@@ -9,7 +9,7 @@ unit UVerduleria;
 {$mode objfpc}
 interface
 
-	uses UCaja, UCliente, UCarrito, UTicket, genericlinkedlist, UProducto, UDateTime, URandomGenerator;
+	uses UCaja, UCajaDeAhorro, UCliente, UCarrito, UTicket, genericlinkedlist, UProducto, UDateTime, UTransferencia, URandomGenerator;
 	
 	type
 	
@@ -17,30 +17,36 @@ interface
 			private
 				nombre: string;
 				vCaja: Caja;
+				vCuenta:CajaDeAhorro;
 			public
-				constructor create(unNombre: string);
+				constructor create(unNombre: string; unaCajaAhorro: CajaDeAhorro);
 				procedure atender(unCliente: Cliente);
 					
 		end;
 	
 implementation	
 	
-		constructor Verduleria.create(unNombre: string);
+		constructor Verduleria.create(unNombre: string; unaCajaAhorro: CajaDeAhorro);
 			begin
 				nombre:=unNombre;
 				vCaja:= Caja.create();
+				vCuenta:=unaCajaAhorro;
 			end;
 			
 		procedure Verduleria.atender(unCliente: Cliente);
 		var
-			c:Carrito;
-			t:Ticket;
+			unCarrito:Carrito;
+			unTicket:Ticket;
+			unaTransferencia: Transferencia;
 			ok:boolean;
 		begin
-			c := Carrito.create();
-			unCliente.elegirProductos(c);
-			t := vCaja.generarTicket(unCliente, c);
-			unCliente.cobrar(t, ok);
+			unCarrito := Carrito.create();
+			unCliente.elegirProductos(unCarrito);
+			unTicket := vCaja.generarTicket(unCliente, unCarrito);
+			unaTransferencia:= Transferencia.create(vCuenta);
+			unCliente.cobrar(unTicket, unaTransferencia, ok);
+			if ok then
+				vCuenta.depositar(unTicket.getTotalAPagar());
 		end;
 end.
 

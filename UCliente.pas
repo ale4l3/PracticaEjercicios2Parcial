@@ -2,27 +2,28 @@ unit UCliente;
 {$mode objfpc}
 
 interface
-	uses URandomGenerator, UCajaDeAhorro, UProducto, UTicket, UCarrito, GenericLinkedList;
+	uses URandomGenerator, UCajaDeAhorro, UProducto, UTicket, UCarrito, UTransferencia, GenericLinkedList;
 	type
-	
+		ListaDeCajaDeAhorro = specialize LinkedList<CajaDeAhorro>;
 		Cliente = class
 			private
 				nombre:string;
-				billetera:CajaDeAhorro;
-		
+				billeteras: ListaDeCajaDeAhorro;
+				
 			public
-				constructor create(unNombre: string; unaBilletera: CajaDeAhorro);
+				constructor create(unNombre: string);
 				function getNombre():string;
 				procedure elegirProductos(unCarrito:Carrito);
-				procedure cobrar(t:Ticket; var ok:boolean);
+				procedure cobrar(t:Ticket; tr: Transferencia; var ok:boolean);
+				procedure agregarCaja(unaCaja:CajaDeAhorro);
 		end;
 	
 implementation
 
-	constructor Cliente.create(unNombre: string; unaBilletera: CajaDeAhorro);
+	constructor Cliente.create(unNombre: string);
 	begin
 		nombre:=unNombre;
-		billetera:=unaBilletera;
+		billeteras:= ListaDeCajaDeAhorro.create();
 	end;
 	
 	function Cliente.getNombre():string;
@@ -57,9 +58,26 @@ implementation
 		end;
 	end;
 	
-	procedure Cliente.cobrar(t:Ticket; var ok:boolean);
+	procedure Cliente.cobrar(t:Ticket;  tr: Transferencia; var ok:boolean);
+	var
+		unMonto:real;
 	begin
-		billetera.extraer(t.getTotalAPagar(), ok);
+		ok:=false;
+		unMonto:=t.getTotalAPagar();
+		while (not billeteras.eol) and not ok do begin
+			billeteras.current().extraer(unMonto, ok);
+			if not ok then
+				billeteras.next();
+		end;
+		if ok then
+			t.imprimir()
+		else 
+			writeln('No se pudo realizar la compra. Sin saldo');
+	end;
+	
+	procedure Cliente.agregarCaja(unaCaja:CajaDeAhorro);
+	begin
+		billeteras.add(unaCaja);
 	end;
 	
 END.

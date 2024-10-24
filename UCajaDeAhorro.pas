@@ -1,3 +1,4 @@
+
 unit UCajaDeAhorro;
 {$mode objfpc}
 
@@ -24,6 +25,7 @@ implementation
     constructor CajaDeAhorro.create(unNumero: integer);
     begin
 		numero:= unNumero;
+		saldo:=0;
     end;
     
     function CajaDeAhorro.getNumero: integer;
