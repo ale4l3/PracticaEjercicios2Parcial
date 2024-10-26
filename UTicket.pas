@@ -31,6 +31,7 @@ implementation
 	constructor Ticket.create(unaHora: Time; unDia: Date);
 		begin
 			cantidadDeProductos := 0;
+			p:= productos.create();
 			cliente := 'zzz';
 			totalAPagar := 0;
 			hora := unaHora;
@@ -70,16 +71,23 @@ implementation
 		
 	procedure Ticket.imprimir();
 	begin
-		writeln('cliente: ', cliente);
-		writeln('hora', hora.getHour);
-		writeln('dia', dia.getDay);
-		writeln ('productos: ');
+		writeln('');
+		writeln('::::::::::::::::::::::::::TICKET::::::::::::::::::::::::::::');
+		writeln('');
+		writeln('Cliente: ', cliente);
+		writeln('Hora: ', hora.getHour, '. Dia: ', dia.getDay);
+		writeln('');
+		writeln ('PRODUCTOS: ');
 		p.reset();
 		while not p.eol() do begin
-			writeln (p.current().toString);
+			writeln ('Producto: ', p.current().getDescripcion(), '. Precio:', p.current().toString, '. Peso: ', p.current().getPeso:2:0, ' kg. ');
 			p.next();
 		end;
-		writeln ('total a pagar', totalAPagar);
+		writeln (':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::');
+		writeln ('');
+		writeln ('TOTAL A PAGAR: ', totalAPagar:2:0);
+		writeln ('');
+		writeln (':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::');
 	end;
 
 end.

@@ -64,15 +64,26 @@ implementation
 	begin
 		ok:=false;
 		unMonto:=t.getTotalAPagar();
+		billeteras.reset();
 		while (not billeteras.eol) and not ok do begin
-			billeteras.current().extraer(unMonto, ok);
+			tr.transferir(billeteras.current(), unMonto, ok);
 			if not ok then
-				billeteras.next();
+				billeteras.next()
+			else if ok then begin
+			t.imprimir();
+			
+			writeln (':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::');
+			writeln ('');
+			writeln('CLIENTE: ', nombre,'. CUENTA: ',  billeteras.current().getNumero, '. MONTO INICIAL: ', billeteras.current().consultarSaldo():2:0);
+			billeteras.current().extraer(unMonto,ok);
+			writeln('CLIENTE: ', nombre,'. CUENTA: ',  billeteras.current().getNumero, '. MONTO FINAL: ', billeteras.current().consultarSaldo():2:0);
+			writeln ('');
+			writeln (':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::');
+
+			end;
 		end;
-		if ok then
-			t.imprimir()
-		else 
-			writeln('No se pudo realizar la compra. Sin saldo');
+			if not ok then
+			writeln('CLIENTE: ', nombre,'. No pudo realizar la compra. SIN SALDO');
 	end;
 	
 	procedure Cliente.agregarCaja(unaCaja:CajaDeAhorro);

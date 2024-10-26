@@ -45,8 +45,14 @@ implementation
 			unTicket := vCaja.generarTicket(unCliente, unCarrito);
 			unaTransferencia:= Transferencia.create(vCuenta);
 			unCliente.cobrar(unTicket, unaTransferencia, ok);
-			if ok then
+			if ok then begin
 				vCuenta.depositar(unTicket.getTotalAPagar());
+				writeln (':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::');
+				writeln ('');
+				writeln('LOCAL: ', nombre,'. CUENTA: ',  vCuenta.getNumero, '. MONTO: ', vCuenta.consultarSaldo():2:0);
+				writeln ('');
+				writeln (':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::');
+			end;
 		end;
 end.
 

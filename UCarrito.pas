@@ -37,6 +37,7 @@ implementation
 		productos.reset();
 		sacarProducto:= productos.current();
 		productos.removeCurrent();
+		cantidadDeProductos:= cantidadDeProductos - 1;
 	end;
 	
 	

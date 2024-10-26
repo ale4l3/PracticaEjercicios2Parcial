@@ -1,7 +1,5 @@
-
 unit UCajaDeAhorro;
 {$mode objfpc}
-
 interface
 
 type

@@ -1,5 +1,5 @@
 program Verduleria1;
-uses UDateTime, URandomGenerator, genericlinkedlist, UProducto, UCarrito, Uticket;
+uses UDateTime, URandomGenerator, genericlinkedlist, UProducto, UCarrito, UTicket;
 
 {   producto = record
 	peso : real;

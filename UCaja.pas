@@ -11,7 +11,7 @@ calcule el total a pagar. Los precios por kilo de cada producto puede ser elegid
 }
 interface
 
-	uses UBalanza, UCliente, UCarrito, UTicket, URandomGenerator, UDateTime;
+	uses UBalanza, UCliente, UCarrito, UTicket, URandomGenerator, UDateTime, UProducto;
 	
 	type
 	
@@ -34,12 +34,11 @@ implementation
 		
 		function Caja.generarTicket(unCliente: Cliente; unCarrito: Carrito): Ticket;
 			var
-				precio : real;
 				rg : RandomGenerator;
-				i:integer;
 				d1,d2: Date; 
 				t1,t2: Time;
 				t: Ticket;
+				p:producto;
 			begin
 				rg := RandomGenerator.create;
 				d1:= Date.create(1, 9, 2024); 
@@ -47,13 +46,15 @@ implementation
 				t1:= Time.create(7, 00, 00); 
 				t2:= Time.create(20,00, 00);
 				t := Ticket.create(rg.getTime(t1, t2), rg.getDate(d1, d2));
-				t.setCliente(unCliente.getNombre);
-				for i:=1 to unCarrito.cuantosProductosTenes() do begin
-					precio := rg.getReal(1,100);
-					cBalanza.setPrecioPorKilo(precio);
-					cBalanza.pesar(unCarrito.getCurrentProducto().getPeso());
+				t.setCliente(unCliente.getNombre());
+				while unCarrito.cuantosProductosTenes() > 0 do begin
+					p:=unCarrito.sacarProducto();
+					cBalanza.setPrecioPorKilo(rg.getReal(1,100));
+					cBalanza.pesar (p.getPeso());
+					t.agregarProducto(p);
 				end;
 				t.setTotalAPagar(cBalanza.getTotalAPagar());
+				cBalanza.limpiar();
 				generarTicket:=t;
 			end;
 	
