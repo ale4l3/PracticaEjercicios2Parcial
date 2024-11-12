@@ -17,7 +17,7 @@ type
 	end;
 		
 	ClaveDato = class
-	private
+	protected
 		clave: Comparable;
 		dato: TObject;
 	public
@@ -28,7 +28,7 @@ type
 	end;
 	
 	Nodo = class
-		private
+		protected
 			elemento: ClaveDato;
 			hijoizq, hijoder: Nodo;
 			hayhijoizq, hayhijoder: boolean;
@@ -71,11 +71,11 @@ type
 		end;	
 	
 	ABBGenerico = class			
-		private
+		protected
 			raiz: Nodo;
 			vacio: boolean;
 			
-		protected
+		
 			procedure agregarNodo(unNodo: Nodo);
 			
 		public
@@ -133,9 +133,9 @@ implementation
 
 	constructor Nodo.create(unaClave: Comparable; unDato: TObject);
 	begin
-	elemento:= ClaveDato.create(unaClave, unDato);
-	hayhijoizq:= false;
-	hayhijoder:= false;
+		elemento:= ClaveDato.create(unaClave, unDato);
+		hayhijoizq:= false;
+		hayhijoder:= false;
 	end;
 	
 	procedure Nodo.agregar(n: Nodo);
@@ -146,8 +146,8 @@ implementation
 			hijoizq.agregar(n)
 		else
 			begin
-			hijoizq:= n;
-			hayhijoizq:= true;
+				hijoizq:= n;
+				hayhijoizq:= true;
 			end;
 		end
 	else
@@ -156,8 +156,8 @@ implementation
 			hijoder.agregar(n)
 		else
 			begin
-			hijoder:= n;
-			hayhijoder:= true;
+				hijoder:= n;
+				hayhijoder:= true;
 			end;
 		end
 	end;
@@ -422,8 +422,8 @@ implementation
     begin
     if vacio then
 		begin
-		raiz:= unNodo;
-		vacio:= false;
+			raiz:= unNodo;
+			vacio:= false;
 		end
 	else
 		raiz.agregar(unNodo);
@@ -432,8 +432,8 @@ implementation
     procedure ABBGenerico.agregar(unaClave: Comparable; unDato: TObject);
     var n: Nodo;
     begin
-    n:= Nodo.create(unaClave, unDato);
-    self.agregarNodo(n);
+		n:= Nodo.create(unaClave, unDato);
+		self.agregarNodo(n);
     end;
     
     procedure ABBGenerico.agregar(unElemento: Comparable);

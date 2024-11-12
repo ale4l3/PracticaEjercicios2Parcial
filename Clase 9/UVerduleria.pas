@@ -24,6 +24,7 @@ interface
 				
 				procedure atender(unCliente: Cliente);
 				procedure crearProductoEnGondola(unaEtiqueta:string;unPrecio:real;unStock:real);
+				procedure aumentar(unPrecio: TObject);
 		end;
 	
 implementation	
@@ -54,6 +55,19 @@ implementation
 		begin
 			gondola.agregar(Cadena.create(unaEtiqueta),ProductoEnGondola.create(unaEtiqueta, unPrecio, unStock)); //Encapsulo el string en un objeto de clase Cadena para que sea de tipo comparable 
 					
+		end;
+		
+		procedure Verduleria.aumentar10Porciento(unPrecio: TObject);
+		var
+		Producto:ProductoEnGondola;
+		begin
+			
+			
+		end;
+		
+		procedure  Verduleria.aumentar(unMinimo, unMaximo:Comparable);
+		begin
+			abb.procesar(unMinimo, unMaximo, @aumentar10Porciento);
 		end;
 end.
 

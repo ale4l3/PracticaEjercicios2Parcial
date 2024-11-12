@@ -18,7 +18,7 @@ type
 		
 	ClaveDato = class
 	private
-		clave: Comparable;
+		clave: Comparable; 
 		dato: TObject;
 	public
 		constructor create(unaClave: Comparable; unDato: TObject);
@@ -28,7 +28,7 @@ type
 	end;
 	
 	Nodo = class
-		private
+		protected
 			elemento: ClaveDato;
 			hijoizq, hijoder: Nodo;
 			hayhijoizq, hayhijoder: boolean;
@@ -71,11 +71,10 @@ type
 		end;	
 	
 	ABBGenerico = class			
-		private
+		protected
 			raiz: Nodo;
 			vacio: boolean;
 			
-		protected
 			procedure agregarNodo(unNodo: Nodo);
 			
 		public
